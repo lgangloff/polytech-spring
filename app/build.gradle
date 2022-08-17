@@ -17,6 +17,11 @@ repositories {
 }
 
 dependencies {
+    // Spring Core
+    implementation 'org.springframework:spring-core:5.3.22'
+    implementation 'org.springframework:spring-context:5.3.22'
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 
 application {

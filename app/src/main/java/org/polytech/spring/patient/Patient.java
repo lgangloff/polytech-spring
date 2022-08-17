@@ -9,6 +9,13 @@ public class Patient {
     private Date birthDate;
     private String email;
     
+    
+    public Patient(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    
     public Integer getId() {
         return id;
     }

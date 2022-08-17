@@ -8,7 +8,8 @@ public class PatientService {
         this.store = store;
     }
 
-    void savePatient(Patient aPatient){
+    public void savePatient(Patient aPatient){
+        System.out.println(String.format("PatientService - Validation du patient %s", aPatient.getEmail()));
         store.persist(aPatient);
     }
 }
