@@ -21,8 +21,6 @@ public class App {
         
             Patient aPatient = new Patient("Jean", "Dupont", "jean.dupont@mail.com");
             patientService.savePatient(aPatient);
-
-            PatientService patientService2 = ctx.getBean(PatientService.class);
         }
     }
 }

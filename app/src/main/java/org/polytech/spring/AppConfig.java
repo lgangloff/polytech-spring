@@ -1,25 +1,28 @@
 package org.polytech.spring;
 
 import org.polytech.spring.patient.PatientDataBase;
+import org.polytech.spring.patient.PatientSerialization;
 import org.polytech.spring.patient.PatientService;
 import org.polytech.spring.patient.PatientStore;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class AppConfig {
 
     @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public PatientStore store(){
+    @Primary
+    public PatientStore databaseStore(){
         return new PatientDataBase();
+    }
+    @Bean
+    public PatientStore serializeStore(){
+        return new PatientSerialization();
     }
     
     @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public PatientService patientService(PatientStore store){
-        return new PatientService(store);
+    public PatientService patientService(){
+        return new PatientService();
     }
 }
