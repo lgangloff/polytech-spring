@@ -4,11 +4,12 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="patientService" class="org.polytech.spring.patient.PatientService">
+    <bean name="patientService" class="org.polytech.spring.patient.PatientService"
+        init-method="init" destroy-method="cleanup">
         <constructor-arg ref="patientStore"/>
     </bean>
 
-    <bean name="patientStore" class="org.polytech.spring.patient.PatientDataBase"/>
+    <bean name="patientStore" class="org.polytech.spring.patient.PatientDataBase"
+        init-method="init" destroy-method="cleanup"/>
 
 </beans>
-
