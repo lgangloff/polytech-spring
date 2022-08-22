@@ -3,10 +3,8 @@ package org.polytech.spring;
 
 import org.polytech.spring.patient.Patient;
 import org.polytech.spring.patient.PatientService;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
@@ -24,6 +22,7 @@ public class App {
             Patient aPatient = new Patient("Jean", "Dupont", "jean.dupont@mail.com");
             patientService.savePatient(aPatient);
 
+            PatientService patientService2 = ctx.getBean(PatientService.class);
         }
     }
 }
