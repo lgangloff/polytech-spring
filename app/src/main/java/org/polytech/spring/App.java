@@ -3,6 +3,7 @@ package org.polytech.spring;
 
 import org.polytech.spring.patient.Patient;
 import org.polytech.spring.patient.PatientService;
+import org.polytech.spring.patient.PatientStore;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
@@ -12,12 +13,11 @@ public class App {
 
         //Initialisation d'un context spring basé sur une configuration par xml
         try ( ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml")) { 
-            //Récupération d'une instance de PatientService
-            PatientService patientService = ctx.getBean(PatientService.class);
-            
-        
-            Patient aPatient = new Patient("Jean", "Dupont", "jean.dupont@mail.com");
-            patientService.savePatient(aPatient);
+                          
+            System.out.println("PatientService: " + ctx.getBean(PatientService.class));
+            System.out.println("PatientService: " + ctx.getBean(PatientService.class));
+            System.out.println("PatientStore: " + ctx.getBean(PatientStore.class));
+            System.out.println("PatientStore: " + ctx.getBean(PatientStore.class));
         } 
 
 

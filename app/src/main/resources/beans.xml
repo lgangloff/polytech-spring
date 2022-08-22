@@ -5,11 +5,11 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean name="patientService" class="org.polytech.spring.patient.PatientService"
-        init-method="init" destroy-method="cleanup">
+        init-method="init" destroy-method="cleanup" scope="prototype">
         <constructor-arg ref="patientStore"/>
     </bean>
 
     <bean name="patientStore" class="org.polytech.spring.patient.PatientDataBase"
-        init-method="init" destroy-method="cleanup"/>
+        init-method="init" destroy-method="cleanup" scope="prototype"/>
 
 </beans>
