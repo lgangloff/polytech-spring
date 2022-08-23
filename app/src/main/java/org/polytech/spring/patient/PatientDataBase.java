@@ -4,9 +4,11 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
+@Primary
 public class PatientDataBase implements PatientStore{
 
     @Value("${store.db.url}")
