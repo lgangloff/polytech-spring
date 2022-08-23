@@ -1,12 +1,12 @@
 package org.polytech.spring.patient;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PatientService {
     
     @Autowired(required = true)
-    @Qualifier("serializeStore")
     private PatientStore store;
 
     public void savePatient(Patient aPatient){
