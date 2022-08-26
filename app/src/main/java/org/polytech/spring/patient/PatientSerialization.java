@@ -1,6 +1,5 @@
 package org.polytech.spring.patient;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Repository
