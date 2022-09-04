@@ -9,8 +9,12 @@ public class Patient {
     private Date birthDate;
     private String email;
     
+    public Patient(){
+
+    }
     
-    public Patient(String firstName, String lastName, String email) {
+    public Patient(Integer id, String firstName, String lastName, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
