@@ -2,10 +2,13 @@ package org.polytech.spring.patient;
 
 import java.time.LocalDate;
 
+import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -15,6 +18,7 @@ public class Patient {
     
     @Id
     @Column(name="id_patient")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
@@ -33,7 +37,7 @@ public class Patient {
     
     @OneToOne(cascade = {})
     @JoinColumn(name = "preferred_id_doctor", 
-        foreignKey = @ForeignKey(name = "patient_preferred_id_doctor_fk"), nullable = false)
+        foreignKey = @ForeignKey(name = "patient_preferred_id_doctor_fk"), nullable = true)
     private Doctor preferredDoctor;
 
     public Patient(){
@@ -76,6 +80,22 @@ public class Patient {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Doctor getPreferredDoctor() {
+        return preferredDoctor;
+    }
+
+    public void setPreferredDoctor(Doctor preferredDoctor) {
+        this.preferredDoctor = preferredDoctor;
     }
 
     
