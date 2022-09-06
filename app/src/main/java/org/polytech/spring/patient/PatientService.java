@@ -1,8 +1,9 @@
 package org.polytech.spring.patient;
 
+import java.time.LocalDate;
 import java.util.List;
 
-import org.polytech.spring.dao.Dao;
+import org.polytech.spring.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -13,30 +14,22 @@ import org.springframework.util.StringUtils;
 public class PatientService {
     
     @Autowired
-    private Dao<Patient> patientDao;
+    private PatientRepository patientRepository;
 
     public Patient save(Patient patient){
-        patientDao.save(patient);
-        return patient;
+        return patientRepository.save(patient);
     }
 
     public Patient update(Integer id, Patient updatedPatient) throws PatientNotFoundException{
-        patientDao.update(updatedPatient);
-        return updatedPatient;
+        return patientRepository.save(updatedPatient);
     }
 
-    public Patient delete(Integer id) throws PatientNotFoundException{
-        return 
-            patientDao.get(id)
-            .map((p)->{
-                patientDao.delete(p);
-                return p;
-            })
-            .orElseThrow(PatientNotFoundException::new);
+    public void delete(Integer id) throws PatientNotFoundException{
+        patientRepository.deleteById(id);
     }
 
     public Patient findOneById(Integer id) throws PatientNotFoundException {
-        return patientDao.get(id).orElseThrow(PatientNotFoundException::new);
+        return patientRepository.findById(id).orElseThrow(PatientNotFoundException::new);
     }
     
     public List<Patient> findAllByNameLike(String name) {
@@ -46,7 +39,7 @@ public class PatientService {
     }
 
     public List<Patient> findAll() {
-        return patientDao.getAll();
+        return patientRepository.findAll();
     }
 
 }
