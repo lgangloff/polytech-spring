@@ -3,6 +3,7 @@ package org.polytech.spring.rest;
 import org.polytech.spring.patient.PatientNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,7 +16,7 @@ public class AppRestExceptionHandler extends ResponseEntityExceptionHandler {
     
     @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
+            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         ResponseEntity<Object> entity =  super.handleHttpMediaTypeNotSupported(ex, headers, status, request);
         ApiError apiError = new ApiError(entity.getStatusCode(), ex.getLocalizedMessage(), "error occured");
         return build(apiError, entity.getHeaders());
