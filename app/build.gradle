@@ -33,6 +33,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    compileJava.options.compilerArgs.add '-parameters'
+    compileTestJava.options.compilerArgs.add '-parameters'
 }
 
 application {
