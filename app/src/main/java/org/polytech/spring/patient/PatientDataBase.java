@@ -1,7 +1,7 @@
 package org.polytech.spring.patient;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 public class PatientDataBase implements PatientStore{
     public void persist(Patient aPatient) {
