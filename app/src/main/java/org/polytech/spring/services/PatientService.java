@@ -1,8 +1,10 @@
-package org.polytech.spring.patient;
+package org.polytech.spring.services;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import org.polytech.spring.patient.Patient;
+import org.polytech.spring.patient.PatientNotFoundException;
 import org.polytech.spring.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

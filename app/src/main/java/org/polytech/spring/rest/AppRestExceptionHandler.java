@@ -1,5 +1,6 @@
 package org.polytech.spring.rest;
 
+import org.polytech.spring.patient.DoctorNotFoundException;
 import org.polytech.spring.patient.PatientNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,12 @@ public class AppRestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handlePatientException(PatientNotFoundException ex, WebRequest request) {
         ApiError apiError = new ApiError(
         HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "Patient introuvable");
+        return build(apiError, null);
+    }
+    @ExceptionHandler({ DoctorNotFoundException.class })
+    public ResponseEntity<Object> handleDoctorException(DoctorNotFoundException ex, WebRequest request) {
+        ApiError apiError = new ApiError(
+        HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), "Docteur introuvable");
         return build(apiError, null);
     }
 

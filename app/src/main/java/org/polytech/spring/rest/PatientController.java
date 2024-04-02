@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.polytech.spring.patient.Patient;
 import org.polytech.spring.patient.PatientNotFoundException;
-import org.polytech.spring.patient.PatientService;
+import org.polytech.spring.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
