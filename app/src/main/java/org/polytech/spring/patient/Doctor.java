@@ -5,63 +5,22 @@ import java.util.Set;
 import org.hibernate.annotations.SoftDelete;
 import org.hibernate.type.NumericBooleanConverter;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
-public class Doctor {
-    @Id
-    @Column(name="id_doctor")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String name;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_address", 
-        foreignKey = @ForeignKey(name = "doctor_id_address_fk"), nullable = false)
-    private Address address;
+public class Doctor extends Person {
     
     @ManyToMany(cascade = {}, fetch = FetchType.LAZY)
     @SoftDelete(columnName = "archived", converter = NumericBooleanConverter.class)
     @JoinTable(name = "doctor_patients", 
-        joinColumns =        {@JoinColumn(name="id_doctor", foreignKey = @ForeignKey(name="doctor_patients_id_doctor_fk"))}, 
-        inverseJoinColumns = {@JoinColumn(name="id_patient",foreignKey = @ForeignKey(name="doctor_patients_id_patient_fk"))})
+        joinColumns =        {@JoinColumn(name="id_person_doctor", foreignKey = @ForeignKey(name="doctor_patients_id_person_doctor_fk"))}, 
+        inverseJoinColumns = {@JoinColumn(name="id_person_patient", foreignKey = @ForeignKey(name="doctor_patients_id_person_patient_fk"))})
     private Set<Patient> patients;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     public Set<Patient> getPatients() {
         return patients;
