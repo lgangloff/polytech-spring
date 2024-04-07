@@ -5,7 +5,7 @@ GET http://localhost:8080/patients
 DELETE http://localhost:8080/patient/3
 
 ###
-GET http://localhost:8080/doctors
+GET http://localhost:8080/doctors/patients?city=City1
 
 ###
 DELETE http://localhost:8080/doctor/1/patient/2

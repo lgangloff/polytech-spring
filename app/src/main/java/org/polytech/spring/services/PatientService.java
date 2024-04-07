@@ -43,4 +43,8 @@ public class PatientService {
         return patientRepository.findAllWithAddress();
     }
 
+    public List<Patient> findAllHavindDoctorInCity(String city) {
+        return patientRepository.withCriteraAPIfindPatientsWithDoctorInCity(city+"%");
+    }
+
 }

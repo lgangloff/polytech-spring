@@ -7,15 +7,20 @@ import org.hibernate.type.YesNoConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.inject.Named;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(
+    name = "patientsWithPreferredDoctorInCity",
+    query = "select p from Patient p join fetch p.address " +
+            "where p.preferredDoctor.address.city like :city"
+)
 @SoftDelete(columnName = "removed", converter = YesNoConverter.class)
 public class Patient extends Person {
     
