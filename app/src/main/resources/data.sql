@@ -1,23 +1,47 @@
-insert into address (id, city) values (1, 'Nancy');
-insert into address (id, city) values (2, 'Dijon');
-insert into address (id, city) values (3, 'Paris');
-insert into address (id, city) values (4, 'Lyon');
-insert into address (id, city) values (5, 'Rouen');
+-- Génération des adresses
+CREATE TEMP TABLE temp_address AS
+SELECT
+    generate_series(1, 2000) AS id,
+    'City' || generate_series(1, 2000) AS city,
+    'Street' || generate_series(1, 2000) AS street,
+    LPAD((random()*99999)::int::text, 5, '0') AS zip_code
+FROM
+    generate_series(1, 2000);
 
-insert into person (id_person, id_address, first_name, last_name, removed) values (1,1, 'Bob', 'Dupont', 'N');
-insert into person (id_person, id_address, first_name, last_name, removed) values (2,2, 'Jacques', 'Martin', 'N');
-insert into person (id_person, id_address, first_name, last_name, removed) values (3,3, 'Julie', 'Rose', 'N');
-insert into person (id_person, id_address, first_name, last_name, removed) values (4,4, 'Dr Hugues', 'Lebrun', 'N');
-insert into person (id_person, id_address, first_name, last_name, removed) values (5,5, 'Dr Paul', 'Darum', 'N');
+-- Insertion des adresses dans la table address
+INSERT INTO address (id, city, street, zip_code)
+SELECT
+    id,
+    city,
+    street,
+    zip_code
+FROM
+    temp_address
+LIMIT 2000;
 
-insert into doctor (id_person) values (4);
-insert into doctor (id_person) values (5);
+-- Génération des docteurs
+INSERT INTO doctor (id_address, first_name, last_name)
+SELECT
+    id,
+    'Doctor' || (random()*1000)::int::text,
+    'Last' || (random()*1000)::int::text
+FROM
+    temp_address
+LIMIT 100;
 
-insert into patient (id_person, birth_date, mail) values (1, '08-04-1985', 'bob@free.fr');
-insert into patient (id_person, birth_date, mail) values (2, '08-12-1995', 'jmartin@yahoo.fr');
-insert into patient (id_person, birth_date, mail) values (3, '12-02-1975', 'jr@gmail.fr');
+-- Génération des patients
+INSERT INTO patient (birth_date, id_address, preferred_id_person_doctor, removed, mail, first_name, last_name)
+SELECT
+    CURRENT_DATE - INTERVAL '20 years' * random() AS birth_date,
+    id,
+    (random()*99 + 1)::int AS preferred_id_person_doctor,
+    'N' AS removed,
+    'patient' || (random()*1000)::int::text || '@example.com' AS mail,
+    'Patient' || (random()*1000)::int::text,
+    'Last' || (random()*1000)::int::text
+FROM
+    temp_address
+LIMIT 100;
 
-
-insert into doctor_patients(archived, id_person_doctor, id_person_patient) values (0, 4, 1);
-insert into doctor_patients(archived, id_person_doctor, id_person_patient) values (0, 4, 2);
-insert into doctor_patients(archived, id_person_doctor, id_person_patient) values (0, 5, 3);
+-- Suppression de la table temporaire
+DROP TABLE temp_address;

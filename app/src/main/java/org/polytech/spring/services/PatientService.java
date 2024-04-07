@@ -1,6 +1,5 @@
 package org.polytech.spring.services;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.polytech.spring.patient.Patient;
@@ -41,7 +40,7 @@ public class PatientService {
     }
 
     public List<Patient> findAll() {
-        return patientRepository.findAll();
+        return patientRepository.findAllWithAddress();
     }
 
 }

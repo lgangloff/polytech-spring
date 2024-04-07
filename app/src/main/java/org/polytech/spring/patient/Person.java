@@ -1,23 +1,20 @@
 package org.polytech.spring.patient;
 
-import org.hibernate.annotations.SoftDelete;
-import org.hibernate.type.YesNoConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@SoftDelete(columnName = "removed", converter = YesNoConverter.class)
+@MappedSuperclass
 public class Person {
     
     @Id
@@ -30,8 +27,7 @@ public class Person {
     @Column(nullable = false)
     protected String lastName;
 
-    
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_address", 
         foreignKey = @ForeignKey(name = "person_id_address_fk"), nullable = false)
     protected Address address;

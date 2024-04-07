@@ -6,10 +6,11 @@ spring:
   jpa:
       properties:
         hibernate.show_sql: true
-        hibernate.format_sql: true
+        hibernate.format_sql: false
         hibernate.generate_statistics: false
       database-platform: org.hibernate.dialect.PostgreSQLDialect
       defer-datasource-initialization: true
       hibernate.ddl-auto: create
+      open-in-view: false
   sql.init.mode: always
   

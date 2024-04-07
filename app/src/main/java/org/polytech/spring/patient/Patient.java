@@ -5,13 +5,18 @@ import java.time.LocalDate;
 import org.hibernate.annotations.SoftDelete;
 import org.hibernate.type.YesNoConverter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.inject.Named;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 @Entity
+@SoftDelete(columnName = "removed", converter = YesNoConverter.class)
 public class Patient extends Person {
     
     @Column(nullable = false)
@@ -20,10 +25,10 @@ public class Patient extends Person {
     @Column(name = "mail", length = 320, nullable = false)
     private String email;
     
-    
-    @OneToOne(cascade = {})
+    @JsonIgnore
+    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
     @JoinColumn(name = "preferred_id_person_doctor", 
-        foreignKey = @ForeignKey(name = "patient_preferred_id_person_doctor_fk"), nullable = true)
+        foreignKey = @ForeignKey(name = "patient_preferred_id_person_doctor_fk"), nullable = false)
     private Doctor preferredDoctor;
 
     public Patient(){
