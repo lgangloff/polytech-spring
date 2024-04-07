@@ -1,8 +1,11 @@
 package org.polytech.spring.patient;
 
 import java.time.LocalDate;
+import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SoftDelete;
+import org.hibernate.envers.Audited;
 import org.hibernate.type.YesNoConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,8 +17,11 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
+@Audited
 @NamedQuery(
     name = "patientsWithPreferredDoctorInCity",
     query = "select p from Patient p join fetch p.address " +
@@ -36,6 +42,12 @@ public class Patient extends Person {
         foreignKey = @ForeignKey(name = "patient_preferred_id_person_doctor_fk"), nullable = false)
     private Doctor preferredDoctor;
 
+    
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_on")
+	@CreationTimestamp
+	private Date createdOn;
+    
     public Patient(){
         super();
     }

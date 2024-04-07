@@ -3,6 +3,7 @@ package org.polytech.spring.patient;
 import java.util.Set;
 
 import org.hibernate.annotations.SoftDelete;
+import org.hibernate.envers.Audited;
 import org.hibernate.type.NumericBooleanConverter;
 
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
+@Audited
 public class Doctor extends Person {
     
     @ManyToMany(cascade = {}, fetch = FetchType.LAZY)
