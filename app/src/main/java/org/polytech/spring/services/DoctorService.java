@@ -36,4 +36,9 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
 
+    public Doctor save(Doctor doc) {
+        
+        return this.doctorRepository.save(doc);
+    }
+
 }

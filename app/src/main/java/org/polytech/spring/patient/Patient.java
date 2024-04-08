@@ -9,7 +9,9 @@ import org.hibernate.envers.Audited;
 import org.hibernate.type.YesNoConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,8 +38,8 @@ public class Patient extends Person {
     @Column(name = "mail", length = 320, nullable = false)
     private String email;
     
-    @JsonIgnore
-    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("hibernateLazyInitializer")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "preferred_id_person_doctor", 
         foreignKey = @ForeignKey(name = "patient_preferred_id_person_doctor_fk"), nullable = false)
     private Doctor preferredDoctor;

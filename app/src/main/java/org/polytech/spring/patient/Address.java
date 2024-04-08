@@ -1,5 +1,7 @@
 package org.polytech.spring.patient;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +9,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
+@Audited
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

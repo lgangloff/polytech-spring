@@ -1,6 +1,10 @@
 package org.polytech.spring.patient;
 
 
+import org.hibernate.envers.Audited;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
@@ -13,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
+@Audited
 public class Person {
     
     @Id
@@ -25,7 +30,8 @@ public class Person {
     @Column(nullable = false)
     protected String lastName;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("hibernateLazyInitializer")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.EAGER)
     @JoinColumn(name = "id_address", 
         foreignKey = @ForeignKey(name = "person_id_address_fk"), nullable = false)
     protected Address address;

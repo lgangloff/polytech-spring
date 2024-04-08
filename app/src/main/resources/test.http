@@ -2,14 +2,69 @@
 GET http://localhost:8080/patients
 
 ###
-DELETE http://localhost:8080/patient/3
+
+POST http://localhost:8080/doctors
+Content-Type: application/json
+
+{
+    "firstName": "Doc",
+    "lastName": "Doc",
+    "address": {
+        "city": "Nancy"
+    }
+}
 
 ###
-GET http://localhost:8080/doctors/patients?city=City1
+POST http://localhost:8080/patients
+Content-Type: application/json
+
+{
+    "firstName": "Loic",
+    "lastName": "Gangloff",
+    "email": "test@mail.com",
+    "birthDate": "1990-03-08",
+
+    "preferredDoctor": {
+        "firstName": "Doc",
+        "lastName": "Doc",
+        "address": {
+            "city": "Nancy"
+        }
+    },
+    "address": {
+        "city": "Villers"
+    }
+}
+
+
 
 ###
-DELETE http://localhost:8080/doctor/1/patient/2
+PUT http://localhost:8080/patient/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "firstName": "Toto",
+    "lastName": "Tata",
+    "email": "toto@mail.com",
+    "birthDate": "2000-03-08",
+
+    "preferredDoctor": {
+        "id": 1,
+        "firstName": "Docteur",
+        "lastName": "Docplop",
+        "address": {
+            "city": "Nancy"
+        }
+    },
+    "address": {
+        "city": "Villers"
+    }
+}
+
+###
+DELETE http://localhost:8080/patient/1
 
 
 ###
-GET http://localhost:8080/persons
+GET http://localhost:8080/patient/1/history?rev=1
