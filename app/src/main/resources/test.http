@@ -1,18 +1,6 @@
 ###
 GET http://localhost:8080/patients
 
-###
-
-POST http://localhost:8080/doctors
-Content-Type: application/json
-
-{
-    "firstName": "Doc",
-    "lastName": "Doc",
-    "address": {
-        "city": "Nancy"
-    }
-}
 
 ###
 POST http://localhost:8080/patients
