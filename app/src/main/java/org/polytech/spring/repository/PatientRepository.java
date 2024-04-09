@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PatientRepository 
-    extends JpaRepository<Patient, Integer>, PatientRepositoryCustom{
+    extends JpaRepository<Patient, Integer>, 
+    PatientRepositoryCustom{
     List<Patient> findByfirstNameOrLastNameOrderByBirthDateDesc(String firstName, String lastName);
     List<Patient> findTop3ByFirstNameStartingWithIgnoringCase(String firstName);
     Long countByLastName(String lastName);

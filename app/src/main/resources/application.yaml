@@ -13,4 +13,6 @@ spring:
       hibernate.ddl-auto: create
       open-in-view: true
   sql.init.mode: always
+
+  data.rest.basePath: /api
   
