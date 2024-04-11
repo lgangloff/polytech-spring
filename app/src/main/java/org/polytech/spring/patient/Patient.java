@@ -8,7 +8,6 @@ import org.hibernate.annotations.SoftDelete;
 import org.hibernate.envers.Audited;
 import org.hibernate.type.YesNoConverter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;

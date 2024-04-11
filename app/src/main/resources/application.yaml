@@ -10,7 +10,7 @@ spring:
         hibernate.generate_statistics: false
       database-platform: org.hibernate.dialect.PostgreSQLDialect
       defer-datasource-initialization: true
-      hibernate.ddl-auto: create
+      hibernate.ddl-auto: create-drop
       open-in-view: true
   sql.init.mode: always
 
