@@ -1,27 +1,3 @@
 
-###
-# @no-redirect
-# @no-cookie-jar 	
-GET http://localhost:8080/api/
-
-
-###
-// @no-redirect
-GET http://localhost:8080/login
-
-
-
-###
-// @no-redirect
-POST http://localhost:8080/login
-Content-Type: application/x-www-form-urlencoded
-
-username=user
-&password=password
-&_csrf=HlRD7PyAuwGOFm1ngZT6z_Mt_GiWi-v2
-
-
-###
-// @no-redirect
-GET http://localhost:8080/api
-
+GET http://localhost:8080/patient/3
+Authorization: Basic user:password
